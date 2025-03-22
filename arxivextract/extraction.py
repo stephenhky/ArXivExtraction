@@ -1,7 +1,11 @@
 
 import urllib.request
+from typing import List
 
 import feedparser
+from feedparser.util import FeedParserDict
+
+from .data import AbstractArticleEntry, BasicArticleEntry
 
 
 base_url = 'http://export.arxiv.org/api/query?'
@@ -9,7 +13,10 @@ base_url = 'http://export.arxiv.org/api/query?'
 
 
 class ArXivExtractor:
-    def retrieve_articles(self, dts, start=0, max_results=100):
+    def __init__(self, nb_articles_each_turn: int=100):
+        self._nb_articles_each_turn = nb_articles_each_turn
+
+    def raw_retrieve_articles_api(self, dts: str, start: int, max_results: int) -> FeedParserDict:
         query = 'search_query=submittedDate:[{dts:}0000+TO+{dts:}2359]&start={start:}&max_results={max_results:}&sortBy=submittedDate&sortOrder=ascending'.format(
             dts=dts,
             start=start,
@@ -19,18 +26,31 @@ class ArXivExtractor:
         url = base_url + query
 
         response = urllib.request.urlopen(url).read()
-        feed = feedparser.parse(response)
+        return feedparser.parse(response)
 
-        articles = []
+    def partial_retrieve_articles(self, dts: str, start: int=0, max_results: int=100) -> List[AbstractArticleEntry]:
+        feed = self.raw_retrieve_articles_api(dts, start, max_results)
+
+        article_entries = []
         for entry in feed.entries:
-            article = {
-                'title': entry.title,
-                'authors': [author.name for author in entry.authors],
-                'published': entry.published,
-                'summary': entry.summary,
-                'arxiv_url': entry.link
-            }
-            articles.append(article)
+            article_entry = BasicArticleEntry.make_entry_from_feed(entry)
+            article_entries.append(article_entry)
 
-        return articles
-            
+        return article_entries
+
+    def retrieve_all_articles_given_date(self, dts: str) -> List[AbstractArticleEntry]:
+        article_entries = []
+        all_retrieved = False
+        start_idx = 0
+        while not all_retrieved:
+            this_article_entries = self.partial_retrieve_articles(
+                dts,
+                start=start_idx,
+                max_results=self._nb_articles_each_turn
+            )
+            article_entries += this_article_entries
+            if len(this_article_entries) < self._nb_articles_each_turn:
+                all_retrieved = True
+            else:
+                start_idx += self._nb_articles_each_turn
+        return article_entries
