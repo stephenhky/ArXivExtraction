@@ -16,7 +16,7 @@ class ArXivExtractor:
     def __init__(self, nb_articles_each_turn: int=100):
         self._nb_articles_each_turn = nb_articles_each_turn
 
-    def raw_retrieve_articles_api(self, dts: str, start: int, max_results: int) -> FeedParserDict:
+    def _raw_retrieve_articles_api(self, dts: str, start: int, max_results: int) -> FeedParserDict:
         query = 'search_query=submittedDate:[{dts:}0000+TO+{dts:}2359]&start={start:}&max_results={max_results:}&sortBy=submittedDate&sortOrder=ascending'.format(
             dts=dts,
             start=start,
@@ -28,8 +28,8 @@ class ArXivExtractor:
         response = urllib.request.urlopen(url).read()
         return feedparser.parse(response)
 
-    def partial_retrieve_articles(self, dts: str, start: int=0, max_results: int=100) -> List[AbstractArticleEntry]:
-        feed = self.raw_retrieve_articles_api(dts, start, max_results)
+    def _partial_retrieve_articles(self, dts: str, start: int=0, max_results: int=100) -> List[AbstractArticleEntry]:
+        feed = self._raw_retrieve_articles_api(dts, start, max_results)
 
         article_entries = []
         for entry in feed.entries:
@@ -43,7 +43,7 @@ class ArXivExtractor:
         all_retrieved = False
         start_idx = 0
         while not all_retrieved:
-            this_article_entries = self.partial_retrieve_articles(
+            this_article_entries = self._partial_retrieve_articles(
                 dts,
                 start=start_idx,
                 max_results=self._nb_articles_each_turn
