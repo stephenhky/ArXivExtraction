@@ -36,4 +36,5 @@ packages = ["arxivextract"]
 zip-safe = false
 
 [project.optional-dependencies]
+keyword = ['keybert']
 test = ["unittest2", "pytest"]
