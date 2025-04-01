@@ -1,7 +1,7 @@
 
 import re
 from typing import List
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractclassmethod
 from dataclasses import dataclass
 
 from feedparser.util import FeedParserDict
@@ -34,6 +34,14 @@ class AbstractArticleEntry(ABC):
     @property
     @abstractmethod
     def data_version(self) -> str:
+        pass
+
+    @abstractclassmethod
+    def make_entry_from_feed(cls, feed_entry: FeedParserDict) -> AbstractArticleEntry:
+        pass
+
+    @abstractclassmethod
+    def make_entry_from_dict(cls, entry_dict: dict) -> AbstractArticleEntry:
         pass
 
 

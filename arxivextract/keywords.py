@@ -1,7 +1,12 @@
 
+from abc import ABC, abstractmethod
+from typing import List
+
 from keybert import KeyBERT
 
 
-class KeywordExtractor:
-    pass
+class AbstractKeywordExtractor(abc):
+    @classmethod
+    def extract_keywords(text: str) -> List[str]:
+        pass
 
