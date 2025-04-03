@@ -182,4 +182,4 @@ class ArticleEntryWithKeywords(BasicArticleEntry):
         entry_dict = entry.to_dict()
         entry_dict['keywords'] = keywords
         entry_dict['data_version'] = '2025-04-03'
-        return ArticleEntryWithKeywords.make_entry_from_dict(**entry_dict)
+        return ArticleEntryWithKeywords.make_entry_from_dict(entry_dict)
