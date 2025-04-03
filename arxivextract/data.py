@@ -177,7 +177,7 @@ class ArticleEntryWithKeywords(BasicArticleEntry):
             return BasicArticleEntry(**{k: v for k, v in entry_dict.items() if k != 'data_version'})
 
     @classmethod
-    def make_entry_by_adding_keywords(cls, entry: BasicArticleEntry, keyword_extractor: AbstractKeywordExtractor) -> ArticleEntryWithKeywords:
+    def make_entry_by_adding_keywords(cls, entry: BasicArticleEntry, keyword_extractor: AbstractKeywordExtractor) -> AbstractArticleEntry:
         keywords = keyword_extractor.extract_keywords(entry.abstract)
         entry_dict = entry.to_dict()
         entry_dict['keywords'] = keywords
