@@ -174,7 +174,7 @@ class ArticleEntryWithKeywords(BasicArticleEntry):
         elif entry_dict['data_version'] != '2025-04-03':
             raise DataVersionError(entry_dict['data_version'], '2025-04-03')
         else:
-            return BasicArticleEntry(**{k: v for k, v in entry_dict.items() if k != 'data_version'})
+            return ArticleEntryWithKeywords(**{k: v for k, v in entry_dict.items() if k != 'data_version'})
 
     @classmethod
     def make_entry_by_adding_keywords(cls, entry: BasicArticleEntry, keyword_extractor: AbstractKeywordExtractor) -> AbstractArticleEntry:
