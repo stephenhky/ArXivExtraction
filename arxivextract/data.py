@@ -178,8 +178,8 @@ class ArticleEntryWithKeywords(BasicArticleEntry):
 
     @classmethod
     def make_entry_by_adding_keywords(cls, entry: BasicArticleEntry, keyword_extractor: AbstractKeywordExtractor) -> AbstractArticleEntry:
-        keywords = keyword_extractor.extract_keywords(entry.abstract)
+        keyword_prob_pairs = keyword_extractor.extract_keywords(entry.abstract)
         entry_dict = entry.to_dict()
-        entry_dict['keywords'] = keywords
+        entry_dict['keywords'] = [keyword for keyword, _ in keyword_prob_pairs]
         entry_dict['data_version'] = '2025-04-03'
         return ArticleEntryWithKeywords.make_entry_from_dict(entry_dict)
