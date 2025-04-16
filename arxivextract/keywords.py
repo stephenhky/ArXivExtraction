@@ -1,13 +1,12 @@
 
 from abc import ABC, abstractmethod
-from typing import List
 
 from keybert import KeyBERT
 
 
 class AbstractKeywordExtractor(ABC):
     @abstractmethod
-    def extract_keywords(self, text: str) -> List[str]:
+    def extract_keywords(self, text: str) -> list[str]:
         pass
 
 
@@ -16,7 +15,7 @@ class KeywordBertKeywordExtractor(AbstractKeywordExtractor):
         self._keyword_model = KeyBERT()
         self._config = config
 
-    def extract_keywords(self, text: str) -> List[str]:
+    def extract_keywords(self, text: str) -> list[str]:
         return self._keyword_model.extract_keywords(text, **self._config)
 
     @property

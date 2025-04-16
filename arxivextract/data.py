@@ -115,7 +115,7 @@ class BasicArticleEntry(AbstractArticleEntry):
 class ArticleEntryWithKeywords(BasicArticleEntry):
     keywords: List[str]
 
-    def set_keywords(keywords: List[str]):
+    def set_keywords(self, keywords: List[str]):
         self.keywords = keywords
 
     def to_dict(self) -> dict:

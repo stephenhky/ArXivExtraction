@@ -25,7 +25,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: Education"
 ]
-dependencies = ["feedparser", "pydantic"]
+dependencies = ["feedparser", "keybert"]
 
 [project.urls]
 Repository = "https://github.com/stephenhky/ArXivExtraction"
