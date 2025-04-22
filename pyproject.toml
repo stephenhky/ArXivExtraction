@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "arxivextract"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
     {name = "Kwan Yuet Stephen Ho", email = "stephenhky@yahoo.com.hk"}
 ]
@@ -25,7 +25,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: Education"
 ]
-dependencies = ["feedparser", "pydantic"]
+dependencies = ["feedparser"]
 
 [project.urls]
 Repository = "https://github.com/stephenhky/ArXivExtraction"
@@ -36,4 +36,5 @@ packages = ["arxivextract"]
 zip-safe = false
 
 [project.optional-dependencies]
+keyword = ['keybert']
 test = ["unittest2", "pytest"]

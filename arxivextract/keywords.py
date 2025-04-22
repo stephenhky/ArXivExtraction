@@ -1,0 +1,48 @@
+
+from abc import ABC, abstractmethod
+
+from keybert import KeyBERT
+
+
+class AbstractKeywordExtractor(ABC):
+    @abstractmethod
+    def extract_keywords(self, text: str) -> list[str]:
+        pass
+
+
+class KeywordBertKeywordExtractor(AbstractKeywordExtractor):
+    def __init__(self, config: dict):
+        self._keyword_model = KeyBERT()
+        self._config = config
+
+    def extract_keywords(self, text: str) -> list[str]:
+        return self._keyword_model.extract_keywords(text, **self._config)
+
+    @property
+    def keywordbertmodel(self) -> KeyBERT:
+        return self._keyword_model
+
+
+keyword_configs = {
+    '2025-04-02-keyword': {
+        'model': 'KeyBERT',
+        'configs': {
+            'keyphrase_ngram_range': (1, 3),
+            'stop_words': 'english',
+            'top_n': 5
+        }
+    }
+}
+
+
+def make_keyword_extractor(version: str) -> AbstractKeywordExtractor:
+    if version not in keyword_configs.keys():
+        raise ValueError('Keyword version {} is not found.'.format(version))
+
+    keyword_extraction_model = keyword_configs[version].get('model')
+    if keyword_extraction_model is None:
+        raise ValueError('NoneType error!')
+    if keyword_extraction_model == 'KeyBERT':
+        return KeywordBertKeywordExtractor(keyword_configs[version].get('configs'))
+    else:
+        raise ValueError('Unknown keyword extraction model: {}'.format(keyword_extraction_model))
