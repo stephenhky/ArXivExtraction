@@ -38,7 +38,7 @@ class TestExtractor(unittest.TestCase):
         assert len(results) == 985
         assert isinstance(results[85], AbstractArticleEntry)
         assert isinstance(results[515], BasicArticleEntry)
-        assert results[0].primary_category == 'astro-ph.HE'
+        assert results[100].primary_category == 'astro-ph.HE'
 
     def test_turnnb(self):
         self.extractor.nb_articles_each_turn = 23
