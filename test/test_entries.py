@@ -36,7 +36,7 @@ class TestEntries(unittest.TestCase):
             'primary_category': 'quant-ph',
             'tags': ['quant-ph']
         }
-        entry = BasicArticleEntry.make_entry_from_feed(dictentry)
+        entry = BasicArticleEntry.make_entry_from_dict(dictentry)
         assert isinstance(entry, BasicArticleEntry)
         assert isinstance(entry, AbstractArticleEntry)
         assert entry.title == dictentry['title']
