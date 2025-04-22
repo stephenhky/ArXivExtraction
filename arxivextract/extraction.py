@@ -28,7 +28,9 @@ class ArXivExtractor:
         response = urllib.request.urlopen(url).read()
         return feedparser.parse(response)
 
-    def _partial_retrieve_articles(self, dts: str, start: int=0, max_results: int=100) -> List[AbstractArticleEntry]:
+    def _partial_retrieve_articles(self, dts: str, start: int=0, max_results: int=None) -> List[AbstractArticleEntry]:
+        if max_results is None:
+            max_results = self._nb_articles_each_turn
         feed = self._raw_retrieve_articles_api(dts, start, max_results)
 
         article_entries = []
@@ -54,3 +56,11 @@ class ArXivExtractor:
             else:
                 start_idx += self._nb_articles_each_turn
         return article_entries
+
+    @property
+    def nb_articles_each_turn(self) -> int:
+        return self._nb_articles_each_turn
+
+    @nb_articles_each_turn.setter
+    def nb_articles_each_turn(self, val: int):
+        self._nb_articles_each_turn = val
