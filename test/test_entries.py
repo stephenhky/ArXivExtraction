@@ -69,7 +69,7 @@ class TestEntries(unittest.TestCase):
         assert isinstance(keyword_entry, AbstractArticleEntry)
         assert isinstance(keyword_entry, ArticleEntryWithKeywords)
         assert isinstance(keyword_entry, BasicArticleEntry)
-        assert keyword_entry.data_version == '2025-04-02-keyword'
+        assert keyword_entry.data_version == '2025-04-03'
 
 
 if __name__ == '__main__':
