@@ -64,7 +64,7 @@ class TestEntries(unittest.TestCase):
         basic_entry = BasicArticleEntry.make_entry_from_dict(dictentry)
         assert isinstance(basic_entry, AbstractArticleEntry)
         assert isinstance(basic_entry, BasicArticleEntry)
-        assert basic_entry.data_version == '2025-04-03'
+        assert basic_entry.data_version == '2025-03-23'
         keyword_entry = ArticleEntryWithKeywords.make_entry_by_adding_keywords(basic_entry, keyword_extractor)
         assert isinstance(keyword_entry, AbstractArticleEntry)
         assert isinstance(keyword_entry, ArticleEntryWithKeywords)
