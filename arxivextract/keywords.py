@@ -32,6 +32,15 @@ keyword_configs = {
             'stop_words': 'english',
             'top_n': 5
         }
+    },
+    '2025-04-23-keyword': {
+        'model': 'KeyBERT',
+        'embed_model': 'allenai-specter',
+        'configs': {
+            'keyphrase_ngram_range': (1, 2),
+            'stop_words': 'english',
+            'top_n': 5
+        }
     }
 }
 
