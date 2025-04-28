@@ -1,7 +1,7 @@
 
-import urllib.request
 from typing import List
 
+import requests
 import feedparser
 from feedparser.util import FeedParserDict
 
@@ -9,7 +9,6 @@ from .data import AbstractArticleEntry, BasicArticleEntry
 
 
 base_url = 'http://export.arxiv.org/api/query?'
-
 
 
 class ArXivExtractor:
@@ -22,11 +21,10 @@ class ArXivExtractor:
             start=start,
             max_results=max_results
         )
-
         url = base_url + query
 
-        response = urllib.request.urlopen(url).read()
-        return feedparser.parse(response)
+        response = requests.request("GET", url)
+        return feedparser.parse(response.text)
 
     def _partial_retrieve_articles(self, dts: str, start: int=0, max_results: int=None) -> List[AbstractArticleEntry]:
         if max_results is None:
