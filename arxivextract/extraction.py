@@ -22,10 +22,8 @@ class ArXivExtractor:
             max_results=max_results
         )
         url = base_url + query
-        payload = {}
-        headers = {}
 
-        response = requests.request("GET", url, headers=headers, payload=payload)
+        response = requests.request("GET", url)
         return feedparser.parse(response.text)
 
     def _partial_retrieve_articles(self, dts: str, start: int=0, max_results: int=None) -> List[AbstractArticleEntry]:
