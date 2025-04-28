@@ -31,10 +31,10 @@ class ArXivExtractor:
             max_results = self._nb_articles_each_turn
         feed = self._raw_retrieve_articles_api(dts, start, max_results)
 
-        article_entries = []
-        for entry in feed.entries:
-            article_entry = BasicArticleEntry.make_entry_from_feed(entry)
-            article_entries.append(article_entry)
+        article_entries = [
+            BasicArticleEntry.make_entry_from_feed(entry)
+            for entry in feed.entries
+        ]
 
         return article_entries
 
