@@ -164,7 +164,7 @@ class ArticleEntryWithKeywords(BasicArticleEntry):
             pdf_url=pdf_url,
             primary_category=primary_category,
             tags=tags,
-            keywords=[]
+            keywords=keywords
         )
 
     @classmethod
