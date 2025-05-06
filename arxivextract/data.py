@@ -22,10 +22,7 @@ class DataVersionError(Exception):
         self.class_version = class_version
 
     def __str__(self):
-        return "Wrong data version. Given version: {given:}, but this class version: {correct:}".format(
-            given=self.given_version,
-            correct=self.class_version
-        )
+        return f"Wrong data version. Given version: {self.given_version}, but this class version: {self.class_version}"
 
 
 class AbstractArticleEntry(ABC):

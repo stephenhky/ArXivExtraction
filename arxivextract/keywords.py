@@ -33,7 +33,7 @@ DEFAULT_SENTENCEEMBED = 'all-MiniLM-L6-v2'
 
 def make_keyword_extractor(version: str) -> AbstractKeywordExtractor:
     if version not in keyword_configs.keys():
-        raise ValueError('Keyword version {} is not found.'.format(version))
+        raise ValueError(f'Keyword version {version} is not found.')
 
     keyword_extraction_model = keyword_configs[version].get('model')
     if keyword_extraction_model is None:
@@ -46,4 +46,4 @@ def make_keyword_extractor(version: str) -> AbstractKeywordExtractor:
             embed_model=keyword_configs[version].get('embed_model', DEFAULT_SENTENCEEMBED)
         )
     else:
-        raise ValueError('Unknown keyword extraction model: {}'.format(keyword_extraction_model))
+        raise ValueError(f'Unknown keyword extraction model: {keyword_extraction_model}')
