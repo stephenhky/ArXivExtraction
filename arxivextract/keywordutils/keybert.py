@@ -9,7 +9,7 @@ class KeywordBertKeywordExtractor(AbstractKeywordExtractor):
         self._keyword_model = KeyBERT(model=embed_model)
         self._config = config
 
-    def extract_keywords(self, text: str) -> list[str]:
+    def extract_keywords(self, text: str) -> list[tuple[str, float]]:
         return self._keyword_model.extract_keywords(text, **self._config)
 
     @property
