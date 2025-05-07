@@ -4,7 +4,7 @@ import unittest
 from arxivextract.extraction import ArXivExtractor
 from arxivextract.data import AbstractArticleEntry, BasicArticleEntry, ArticleEntryWithKeywords
 from arxivextract.keywords import make_keyword_extractor, AbstractKeywordExtractor
-from arxivextract.keybert.keybert import KeywordBertKeywordExtractor
+from arxivextract.keywordutils.keybert import KeywordBertKeywordExtractor
 
 
 class TestEntries(unittest.TestCase):

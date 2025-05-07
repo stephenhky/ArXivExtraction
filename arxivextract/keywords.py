@@ -39,7 +39,7 @@ def make_keyword_extractor(version: str) -> AbstractKeywordExtractor:
     if keyword_extraction_model is None:
         raise ValueError('NoneType error!')
     if keyword_extraction_model == 'KeyBERT':
-        from .keybert.keybert import KeywordBertKeywordExtractor
+        from .keywordutils.keybert import KeywordBertKeywordExtractor
 
         return KeywordBertKeywordExtractor(
             keyword_configs[version].get('configs'),
