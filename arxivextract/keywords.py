@@ -26,6 +26,9 @@ keyword_configs = {
             'stop_words': 'english',
             'top_n': 5
         }
+    },
+    '2025-05-07-keyword': {
+        'model': 'YAKE'
     }
 }
 DEFAULT_SENTENCEEMBED = 'all-MiniLM-L6-v2'
@@ -45,5 +48,9 @@ def make_keyword_extractor(version: str) -> AbstractKeywordExtractor:
             keyword_configs[version].get('configs'),
             embed_model=keyword_configs[version].get('embed_model', DEFAULT_SENTENCEEMBED)
         )
+    elif keyword_extraction_model == 'YAKE':
+        from .keywordutils.yake import YakeKeywordExtractor
+
+        return YakeKeywordExtractor()
     else:
         raise ValueError(f'Unknown keyword extraction model: {keyword_extraction_model}')
