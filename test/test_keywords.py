@@ -37,7 +37,7 @@ class TestKeywordExtraction(unittest.TestCase):
         assert isinstance(all_article_entries[0], ArticleEntryWithKeywords)
 
     def test_yake(self):
-        keyword_extractor = make_keyword_extractor('2025-04-23-keyword')
+        keyword_extractor = make_keyword_extractor('2025-05-07-keyword')
         assert isinstance(keyword_extractor, YakeKeywordExtractor)
 
         all_article_entries = self.arxiv_extractor._partial_retrieve_articles('20250327')
