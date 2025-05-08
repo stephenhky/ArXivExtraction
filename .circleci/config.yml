@@ -20,6 +20,7 @@ shared: &shared
           pip install --upgrade --user .
           pip install --upgrade --user .[test]
           pip install --upgrade --user .[keyword]
+          pip install --upgrade --user .[yake]
 
     - run:
         name: Run Unit Tests
